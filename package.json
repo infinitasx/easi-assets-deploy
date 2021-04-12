@@ -1,0 +1,36 @@
+{
+  "name": "easi-assets-deploy",
+  "version": "0.1.0",
+  "description": "easi web assets deploy",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node scripts/postInstall.js",
+    "uninstall": "node scripts/uninstall.js"
+  },
+  "bin": {
+    "easi-assets-deploy": "bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infinitasx/easi-assets-deploy.git"
+  },
+  "keywords": [
+    "web",
+    "assets",
+    "deploy"
+  ],
+  "author": "Chris Chen <me.chenying@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/infinitasx/easi-assets-deploy/issues"
+  },
+  "homepage": "https://github.com/infinitasx/easi-assets-deploy#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "js-yaml": "^4.0.0",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2",
+    "yargs-parser": "^20.2.7"
+  }
+}
