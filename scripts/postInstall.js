@@ -62,6 +62,9 @@ if (cwd.indexOf('node_modules') >= 0) {
             uses: 'actions/checkout@v2'
           }, {
             name: 'build',
+            env: {
+              REPO_ACCESS_TOKEN: '${{ secrets.REPO_ACCESS_TOKEN }}',
+            },
             run: 'cmdb build',
           }]
         }
