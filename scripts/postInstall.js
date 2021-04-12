@@ -49,7 +49,7 @@ if (cwd.indexOf('node_modules') >= 0) {
   // save .github/workflows/build.yaml
   const githubDir = path.join(appRoot, '.github')
   if (!fs.existsSync(githubDir)) {
-    const workflowsDir = path.join(githubDir, '.workflows')
+    const workflowsDir = path.join(githubDir, 'workflows')
     const workflowsYAMLPath = path.join(workflowsDir, 'build.yaml')
     mkdirp.sync(workflowsDir)
     const workflowsYAMLContent = YAML.dump({
