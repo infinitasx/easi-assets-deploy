@@ -4,10 +4,13 @@ const deploy = require('../lib/index')
 
 console.log(argv)
 
-const { backendBranch } = argv
+const {
+  env,
+  backendBranch
+} = argv
 
-if (!backendBranch) {
+if (!env || !backendBranch) {
   throw new Error('Backend branch name is required.')
 }
 
-deploy(backendBranch)
+deploy(env, backendBranch)

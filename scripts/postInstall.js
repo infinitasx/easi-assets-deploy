@@ -39,8 +39,9 @@ if (cwd.indexOf('node_modules') >= 0) {
     const easiYAMLContent = YAML.dump({
       group: 'fe',
       name: pkg.name,
-      build: 'yarn && yarn easi-assets-deploy --backendBranch ${version_build}',
+      build: 'yarn && yarn easi-assets-deploy --env ${profile} --backendBranch ${version_build}',
     }, {
+      lineWidth: -1,
       noCompatMode: true,
     })
     fs.writeFileSync(easiYAMLPath, easiYAMLContent)
