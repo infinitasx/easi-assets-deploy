@@ -95,7 +95,7 @@ if (cwd.indexOf('node_modules') >= 0) {
             EASI_PROFILE: 'production',
             REPO_ACCESS_TOKEN: '${{ secrets.REPO_ACCESS_TOKEN }}',
           },
-          run: 'cmdb upgrade',
+          run: 'cmdb build',
         }],
       }
     },
