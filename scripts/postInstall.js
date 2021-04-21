@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const YAML = require('js-yaml')
 const mkdirp = require('mkdirp')
+const rimraf = require('rimraf')
 
 function exposeScript (pkgObj) {
   if (!pkgObj.hasOwnProperty('scripts')) {
@@ -47,32 +48,59 @@ if (cwd.indexOf('node_modules') >= 0) {
     fs.writeFileSync(easiYAMLPath, easiYAMLContent)
   }
 
-  // save .github/workflows/build.yaml
+  // 生成 Github Actions 配置
   const githubDir = path.join(appRoot, '.github')
-  if (!fs.existsSync(githubDir)) {
-    const workflowsDir = path.join(githubDir, 'workflows')
-    const workflowsYAMLPath = path.join(workflowsDir, 'build.yaml')
-    mkdirp.sync(workflowsDir)
-    const workflowsYAMLContent = YAML.dump({
-      name: 'BUILD',
-      on: { push: { tags: ['v*'] } },
-      jobs: {
-        build: {
-          'runs-on': ['self-hosted', 'linux', 'x64', 'jp'],
-          steps: [{
-            uses: 'actions/checkout@v2'
-          }, {
-            name: 'build',
-            env: {
-              REPO_ACCESS_TOKEN: '${{ secrets.REPO_ACCESS_TOKEN }}',
-            },
-            run: 'cmdb build',
-          }]
-        }
-      },
-    }, {
-      noCompatMode: true,
-    })
-    fs.writeFileSync(workflowsYAMLPath, workflowsYAMLContent)
-  }
+  const workflowsDir = path.join(githubDir, 'workflows')
+  mkdirp.sync(workflowsDir)
+  // 删除已有配置
+  rimraf.sync(path.join(workflowsDir, '*.yaml'))
+
+  // 测试环境配置
+  const testingYAMLPath = path.join(workflowsDir, 'testing.yaml')
+  const testingYAMLContent = YAML.dump({
+    name: '测试环境',
+    on: { push: { tags: ['v*'] } },
+    jobs: {
+      build: {
+        'runs-on': ['self-hosted', 'linux', 'x64', 'jp'],
+        steps: [{
+          uses: 'actions/checkout@v2'
+        }, {
+          name: 'build',
+          env: {
+            REPO_ACCESS_TOKEN: '${{ secrets.REPO_ACCESS_TOKEN }}',
+          },
+          run: 'cmdb build',
+        }]
+      }
+    },
+  }, {
+    noCompatMode: true,
+  })
+  fs.writeFileSync(testingYAMLPath, testingYAMLContent)
+
+  // 生产环境配置
+  const productionYAMLPath = path.join(workflowsDir, 'production.yaml')
+  const productionYAMLContent = YAML.dump({
+    name: '生产环境',
+    on: { release: { tags: ['created'] } },
+    jobs: {
+      build: {
+        'runs-on': ['self-hosted', 'linux', 'x64', 'jp'],
+        steps: [{
+          uses: 'actions/checkout@v2'
+        }, {
+          name: '发布到生产环境',
+          env: {
+            EASI_PROFILE: 'production',
+            REPO_ACCESS_TOKEN: '${{ secrets.REPO_ACCESS_TOKEN }}',
+          },
+          run: 'cmdb upgrade',
+        }],
+      }
+    },
+  }, {
+    noCompatMode: true,
+  })
+  fs.writeFileSync(productionYAMLPath, productionYAMLContent)
 }
