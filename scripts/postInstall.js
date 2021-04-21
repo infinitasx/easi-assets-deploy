@@ -83,7 +83,7 @@ if (cwd.indexOf('node_modules') >= 0) {
   const productionYAMLPath = path.join(workflowsDir, 'production.yaml')
   const productionYAMLContent = YAML.dump({
     name: '生产环境',
-    on: { release: { tags: ['created'] } },
+    on: { release: { types: ['created'] } },
     jobs: {
       build: {
         'runs-on': ['self-hosted', 'linux', 'x64', 'jp'],
