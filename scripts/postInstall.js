@@ -17,9 +17,12 @@ function exposeScript (pkgObj) {
 function exposeConfig (pkgObj) {
   if (!pkgObj.hasOwnProperty('easiAssetsDeployConfig')) {
     pkgObj.easiAssetsDeployConfig = {
-      backendProjectName: '',
-      backendRepositoryUrl: '',
-      backendTemplateDir: '',
+      backend: {
+        projectName: '',
+        repositoryUrl: '',
+        templateDir: '',
+      },
+      assetsFilePattern: '*.html', // One of ['.', '*.html']
     }
   }
 }
