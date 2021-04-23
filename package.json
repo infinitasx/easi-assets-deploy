@@ -28,6 +28,7 @@
   "homepage": "https://github.com/infinitasx/easi-assets-deploy#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "glob": "^7.1.6",
     "js-yaml": "^4.0.0",
     "mkdirp": "^1.0.4",
     "rimraf": "^3.0.2",
