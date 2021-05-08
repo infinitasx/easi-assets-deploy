@@ -39,17 +39,17 @@ if (cwd.indexOf('node_modules') >= 0) {
 
   // save .easi.yaml
   const easiYAMLPath = path.join(appRoot, '.easi.yaml')
-  if (!fs.existsSync(easiYAMLPath)) {
-    const easiYAMLContent = YAML.dump({
-      group: 'fe',
-      name: pkg.name,
-      build: 'yarn install --pure-lockfile && yarn easi-assets-deploy --env ${profile} --version ${version} --versionBuild ${version_build}',
-    }, {
-      lineWidth: -1,
-      noCompatMode: true,
-    })
-    fs.writeFileSync(easiYAMLPath, easiYAMLContent)
-  }
+  // 删除已有配置
+  rimraf.sync(easiYAMLPath)
+  const easiYAMLContent = YAML.dump({
+    group: 'fe',
+    name: pkg.name,
+    build: 'yarn install --pure-lockfile && yarn easi-assets-deploy --env ${profile} --version ${version} --versionBuild ${version_build}',
+  }, {
+    lineWidth: -1,
+    noCompatMode: true,
+  })
+  fs.writeFileSync(easiYAMLPath, easiYAMLContent)
 
   // 生成 Github Actions 配置
   const githubDir = path.join(appRoot, '.github')
