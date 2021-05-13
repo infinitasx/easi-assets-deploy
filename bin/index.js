@@ -6,11 +6,8 @@ console.log(argv)
 
 const {
   env,
-  backendBranch
+  version,
+  versionBuild: backendBranchName
 } = argv
 
-if (!env || !backendBranch) {
-  throw new Error('Backend branch name is required.')
-}
-
-deploy(env, backendBranch)
+deploy(env, version, backendBranchName)
