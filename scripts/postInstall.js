@@ -45,6 +45,10 @@ if (cwd.indexOf('node_modules') >= 0) {
     group: 'fe',
     name: pkg.name,
     build: 'yarn install --pure-lockfile && yarn easi-assets-deploy --env ${profile} --version ${version} --versionBuild ${version_build}',
+    artifacts: [{
+      destination: 'append-to-notification',
+      artifact: './devops-notification'
+    }]
   }, {
     lineWidth: -1,
     noCompatMode: true,
@@ -106,4 +110,10 @@ if (cwd.indexOf('node_modules') >= 0) {
     noCompatMode: true,
   })
   fs.writeFileSync(productionYAMLPath, productionYAMLContent)
+
+  // CHANGELOG.md
+  const changelogPath = path.join(appRoot, 'CHANGELOG.md')
+  if (!fs.existsSync(changelogPath)) {
+    fs.writeFileSync(changelogPath, '# Changelog\n')
+  }
 }
