@@ -30,7 +30,6 @@
     "chalk": "^4.1.0",
     "glob": "^7.1.6",
     "js-yaml": "^4.0.0",
-    "markdown-it": "^12.0.6",
     "mkdirp": "^1.0.4",
     "rimraf": "^3.0.2",
     "yargs-parser": "^20.2.7"

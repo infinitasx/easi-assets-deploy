@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const os =require('os')
 const YAML = require('js-yaml')
 const mkdirp = require('mkdirp')
 const rimraf = require('rimraf')
@@ -114,6 +115,14 @@ if (cwd.indexOf('node_modules') >= 0) {
   // CHANGELOG.md
   const changelogPath = path.join(appRoot, 'CHANGELOG.md')
   if (!fs.existsSync(changelogPath)) {
-    fs.writeFileSync(changelogPath, '# Changelog\n')
+    fs.writeFileSync(
+      changelogPath,
+      [
+        '# 变更日志',
+        '本项目的所有更改都将记录在此文件中。',
+        '本文件格式基于 [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) ，' +
+        '并且遵循 [Semantic Versioning](https://semver.org/spec/v2.0.0.html) 。',
+        os.EOL
+      ].join(os.EOL + os.EOL))
   }
 }
