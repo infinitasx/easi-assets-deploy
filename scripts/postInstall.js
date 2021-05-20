@@ -24,6 +24,7 @@ function exposeConfig (pkgObj) {
         templateDir: '',
       },
       assetsFilePattern: '*.html', // One of ['.', '*.html']
+      asLibrary: false,
     }
   }
 }
