@@ -4,10 +4,14 @@ const deploy = require('../lib/index')
 
 console.log(argv)
 
-const {
+let {
   env,
   version,
   versionBuild: backendBranchName
 } = argv
+
+if (backendBranchName === true) {
+  backendBranchName = undefined
+}
 
 deploy(env, version, backendBranchName)

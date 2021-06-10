@@ -22,6 +22,7 @@ function exposeConfig (pkgObj) {
         projectName: '',
         repositoryUrl: '',
         templateDir: '',
+        branchName: '',
       },
       assetsFilePattern: '*.html', // One of ['.', '*.html']
       asLibrary: false,
