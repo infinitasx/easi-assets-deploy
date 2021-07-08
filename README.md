@@ -1,6 +1,6 @@
 # easi-assets-deploy
 
-EASI 前端静态资源部署工具。原理及流程请参考 [EASI Web 静态资源部署方案](https://www.notion.so/Web-e87a55d8236749208ff9d5a75e17ed76)
+EASI 前端静态资源部署工具。原理及流程请参考 [EASI Web 静态资源部署方案](https://www.notion.so/Web-e87a55d8236749208ff9d5a75e17ed76)。
 
 ## 安装
 
@@ -8,7 +8,7 @@ EASI 前端静态资源部署工具。原理及流程请参考 [EASI Web 静态�
 $ yarn add https://github.com/infinitasx/easi-assets-deploy.git#main
 ```
 
-安装完成后，会在项目根目录生成 CI 所需要的`.github`目录和`.easi.yaml`文件，同时在`package.json`中生成部署静态资源需要的配置数据：
+安装完成后，会在项目根目录生成 CI 所需要的`.github`目录和`.easi.yaml`文件，同时在`package.json`中生成部署静态资源需要的配置项：
 
 ```json
 {
@@ -27,7 +27,7 @@ $ yarn add https://github.com/infinitasx/easi-assets-deploy.git#main
 
 ## 配置
 
-一般情况下，前端项目会配合后端项目进行部署，需要配置`backend`相关参数。如果`backend`默认置空，则只只会对前端静态资源进行部署。
+一般情况下，前端项目会配合后端项目进行部署，需要配置`backend`相关参数。如果`backend`个参数保留默认值，则只会对前端静态资源进行发布。
 
 - `backend.projectName`：后端项目克隆代码时的目录名称，与后端项目名称相同，也可以自定义。默认值`''`
 - `backend.repositoryUrl`：后端项目仓库地址。默认值`''`
@@ -38,7 +38,12 @@ $ yarn add https://github.com/infinitasx/easi-assets-deploy.git#main
 
 ## 使用
 
-基于 EASI CMDB 标准发布流程，`git tag v*`并`push`即可。前端项目推荐使用 [easi-auto-tag](https://github.com/infinitasx/easi-auto-tag) 
+基于 EASI CMDB 标准发布流程，`git tag v*`并`push`即可。前端项目推荐使用 [easi-auto-tag](https://github.com/infinitasx/easi-auto-tag) 。
+
+在构建阶段，工具会注入`EASI_BUILD_ENV`和`EASI_ASSETS_CDN`两个环境变量，在项目`vue.config.js`中，可根据变量值编写构建逻辑。
+
+- `EASI_BUILD_ENV`：构建环境。测试环境为`'testing'`，生产环境为`'production'`
+- `EASI_ASSETS_CDN`：CDN 地址。测试环境为`'https://static.melbdelivery.com'`，生产环境为`'https://static.easiglobal.com'`
 
 ## FAQ
 
