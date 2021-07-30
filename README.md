@@ -36,6 +36,14 @@ $ yarn add https://github.com/infinitasx/easi-assets-deploy.git#main
 - `assetsFilePattern`：向`backend.templateDir`复制文件的通配符，可以是字符串或数组，默认值`'*.html'`。比如：`'.'`表示`dist`目录所有文件，`'*.html'`表示所有 HTML 文件，`['*.html']`同上，`['*.html', '*.jpg']`etc.
 - `asLibrary`：当一个前端项目作为独立库发布时配置此项，默认值`false`。发布后，在 CDN 目录里会根据`package.json`文件`version`字段保持各版本独立，比如：`/a-library-project/1.0.0/index.js`，`/a-library-project/1.1.0/index.js`
 
+构建后，后端项目模板文件存放目录结构如下：
+
+```
+/index.html
+/testing/index.html
+/production/index.html
+```
+
 ## 使用
 
 基于 EASI CMDB 标准发布流程，`git tag v*`并`push`即可。前端项目推荐使用 [easi-auto-tag](https://github.com/infinitasx/easi-auto-tag) 。
