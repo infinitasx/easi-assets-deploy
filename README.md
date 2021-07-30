@@ -40,8 +40,11 @@ $ yarn add https://github.com/infinitasx/easi-assets-deploy.git#main
 
 ```
 /index.html
+/another_template.html
 /testing/index.html
+/testing/another_template.html
 /production/index.html
+/production/another_template.html
 ```
 
 ## 使用
