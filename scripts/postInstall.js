@@ -51,7 +51,12 @@ if (cwd.indexOf('node_modules') >= 0) {
     artifacts: [{
       destination: 'append-to-notification',
       artifact: './devops-notification'
-    }]
+    }],
+    notifications: {
+      feishu: {
+        webhook: []
+      }
+    }
   }, {
     lineWidth: -1,
     noCompatMode: true,
