@@ -74,7 +74,10 @@ if (cwd.indexOf('node_modules') >= 0) {
   const testingYAMLPath = path.join(workflowsDir, 'testing.yaml')
   const testingYAMLContent = YAML.dump({
     name: '测试环境',
-    on: { push: { tags: ['v*'] } },
+    on: {
+      push: { tags: ['v*'], branches: ['develop'] },
+      pull_request: { branches: ['develop'] }
+    },
     jobs: {
       build: {
         'runs-on': ['self-hosted', 'linux', 'x64', 'jp'],
